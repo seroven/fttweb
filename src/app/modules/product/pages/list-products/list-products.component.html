@@ -1,0 +1,41 @@
+<div class="mx-8 my-5">
+  <div class="w-full flex justify-content-between mb-4 align-items-center">
+    <div>
+      <span class="text-2xl font-semibold">List Products</span>
+    </div>
+    <div>
+      <button pButton pRipple label="New" icon="pi pi-plus" class="mr-2" (click)="toggleSaveModal()"></button>
+    </div>
+  </div>
+  <p-table #dt [value]="rows" [loading]="loadRows" [rows]="5" [paginator]="true" [rowHover]="true"
+    styleClass="p-datatable-gridlines p-datatable-sm" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="description">Description</th>
+        <th pSortableColumn="price">Price</th>
+        <th pSortableColumn="price">Category</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td class="table-container-wrap max-w-2rem">{{ product.description }}</td>
+        <td class="table-container-wrap max-w-2rem">{{ product.price }}</td>
+        <td class="table-container-wrap max-w-2rem">{{ product.category?.description }}</td>
+        <td class="text-center w-12rem">
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-warning mr-2"
+            (click)="selectProduct(product); toggleSaveModal()"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-danger"
+            (click)="selectProduct(product); toggleDeleteModal()"></button>
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+
+
+
+</div>
+
+<app-save-product (onHidePage)="toggleSaveModal()" [visible]="visibleSaveModal"></app-save-product>
+<app-delete-product (onHidePage)="toggleDeleteModal()" [visible]="visibleDeleteModal"></app-delete-product>

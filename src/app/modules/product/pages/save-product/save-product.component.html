@@ -1,0 +1,39 @@
+<div class="flex justify-content-center">
+  <p-dialog header="Nuevo producto" [(visible)]="visible" [modal]="true" [breakpoints]="{ '960px': '75vw' }"
+    [style]="{ width: '50vw' }" [closable]="false" [draggable]="false">
+    <form [formGroup]="formProduct">
+      <span class="p-float-label mt-5">
+        <input id="description" formControlName="description" type="text" placeholder="example" class="extend-input"
+          pInputText />
+        <label for="description">Description <span class="p-error">*</span> </label>
+      </span>
+      <span class="p-float-label mt-5">
+        <input id="price" formControlName="price" type="text" placeholder="example" class="extend-input" pInputText />
+        <label for="price">Price <span class="p-error">*</span> </label>
+      </span>
+      <span class="p-float-label mt-5">
+        <p-dropdown inputId="categoriesSelect" *ngIf="categoriesList$ | async as categories" [options]="categories"
+          placeholder="Selecciona una categoría" formControlName="idcategory" optionLabel="description" optionValue="id"
+          appendTo="body" class="extend-input">
+
+        </p-dropdown>
+        <label for="categoriesSelect">Category <span class="p-error">*</span></label>
+      </span>
+
+
+      <div class="flex mt-5 justify-content-between flex-wrap w-full">
+        <div>
+          <p-button label="Guardar" [loading]="loadSubmit" (onClick)="submit()"
+            [disabled]="!formProduct.valid"></p-button>
+        </div>
+        <div>
+          <p-button label="Limpiar" styleClass="p-button-success" class="mr-2" (onClick)="reset()"></p-button>
+          <p-button label="Cancelar" styleClass="p-button-danger" (onClick)="cancel()"></p-button>
+
+        </div>
+
+      </div>
+
+    </form>
+  </p-dialog>
+</div>
